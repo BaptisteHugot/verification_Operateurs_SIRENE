@@ -58,7 +58,7 @@ for num in range(0, len(data)):
     sirenFromSiret = convertSiretToSiren(str(data["SIRET_ACTEUR"][num]))
     increment = increment + 1
     if(sirenFromSiret != ""):
-        url = "https://api.insee.fr/entreprises/sirene/V3/siren/"+sirenFromSiret # URL de l'API propre à chaque opérateur
+        url = "https://api.insee.fr/entreprises/sirene/siren/"+sirenFromSiret # URL de l'API propre à chaque opérateur
         response = requests.get(url, params=params, headers=headers) # Requête pour récupérer de manière unitaire les éléments
         # On convertit la réponse obtenue au format json
         jsonResponse = response.json()
