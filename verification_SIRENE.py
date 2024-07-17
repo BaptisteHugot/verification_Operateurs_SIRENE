@@ -70,14 +70,16 @@ for num in range(0, len(data)):
             nomEntite = jsonResponse["uniteLegale"]["periodesUniteLegale"][0]["denominationUniteLegale"] # Nom
             etatAdministratif = jsonResponse["uniteLegale"]["periodesUniteLegale"][0]["etatAdministratifUniteLegale"] # Etat administratif (A : administrativement active ; C : administrativement cessée)
             dateDerniereModification = jsonResponse["uniteLegale"]["periodesUniteLegale"][0]["dateDebut"] # Date de dernière modification
-            dataInsee.append([data["IDENTITE_OPERATEUR"][num],data["CODE_OPERATEUR"][num],data["SIRET_ACTEUR"][num],data["RCS_ACTEUR"][num],data["ADRESSE_COMPLETE_ACTEUR"][num],data["BESOIN_RES_NUM"][num],data["DATE_DECLARATION_OPERATEUR"][num], sirenFromSiret, statutRequete, dateCreation, nomEntite, etatAdministratif, dateDerniereModification])
+            dataInsee.append([data["IDENTITE_OPERATEUR"][num],data["CODE_OPERATEUR"][num],data["SIRET_ACTEUR"][num],data["RCS_ACTEUR"][num],data["ADRESSE_COMPLETE_ACTEUR"][num],data["ATTRIB_RESS_NUM"][num],data["DATE_DECLARATION_OPERATEUR"][num], sirenFromSiret, statutRequete, dateCreation, nomEntite, etatAdministratif, dateDerniereModification])
             print(str(increment) + " / " + str(numberLines)) # On affiche la progression
-        except KeyError:
-            print(jsonResponse) # On affiche les SIREN en erreur et les raisons de cette erreur
+        except Exception as ex:
+            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            print(message) # On affiche les raisons de l'erreur
         time.sleep(2) # Pour effectuer une requête toutes les 2 secondes (et respecter la durée minimale imposée par l'INSEE de 30 requêtes par minute)
 
 dataframe = pd.DataFrame(dataInsee)
-dataframe.to_csv(r"./MAJOPE_Sirene.csv", header=["IDENTITE_OPERATEUR","CODE_OPERATEUR","SIRET_ACTEUR","RCS_ACTEUR","ADRESSE_COMPLETE_ACTEUR","BESOIN_RES_NUM","DATE_DECLARATION_OPERATEUR", "SIREN_INSEE","STATUT_REQUETE_API", "DATE_CREATION_INSEE", "NOM_ENTITE_INSEE", "ETAT_ADMINISTRATIF_INSEE", "DATE_DERNIERE_MODIFICATION_INSEE"], index=False, sep=";",encoding="latin-1")
+dataframe.to_csv(r"./MAJOPE_Sirene.csv", header=["IDENTITE_OPERATEUR","CODE_OPERATEUR","SIRET_ACTEUR","RCS_ACTEUR","ADRESSE_COMPLETE_ACTEUR","ATTRIB_RESS_NUM","DATE_DECLARATION_OPERATEUR", "SIREN_INSEE","STATUT_REQUETE_API", "DATE_CREATION_INSEE", "NOM_ENTITE_INSEE", "ETAT_ADMINISTRATIF_INSEE", "DATE_DERNIERE_MODIFICATION_INSEE"], index=False, sep=";",encoding="latin-1")
 
 et = time.time() # Fin du chronomètre
 elapsed_time = time.strftime("%H:%M:%S", time.gmtime(et - st)) # Durée d'exécution du programme
