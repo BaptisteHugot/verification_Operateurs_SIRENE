@@ -7,19 +7,6 @@ import time
 st = time.time() # Début du chronomètre
 print("Programme démarré")
 
-# Fonction pour récupérer un jeton pour accéder à l'API Sirene
-def get_access_token(url, client_id, client_secret):
-    try:
-        response = requests.post(
-            url,
-            data = {"grant_type": "client_credentials"},
-            auth = (client_id, client_secret),
-            timeout = 10
-           )
-        return response.json()["access_token"]
-    except requests.exceptions.Timeout:
-        print("Timeout")
-
 # Fonction qui convertit un SIRET en SIREN
 def convertSiretToSiren(siret):
     siret.replace(" ","") # On supprime les espaces
@@ -32,13 +19,9 @@ def convertSiretToSiren(siret):
 # On récupère la date du jour pour avoir les derniers éléments à jour de l'API
 today = date.today()
 
-# On récupère un jeton d'accès et on le convertit dans le format attendu
-token = get_access_token("https://api.insee.fr/token", "XXXXXXXXX", "XXXXXXXXX") # Entrer ici les jetons d'accès à l'API
-authorizationHeader = "Bearer "+token
-
 # Entêtes nécessaires pour récupérer les éléments de l'API
 headers = {
-    'Authorization': authorizationHeader,
+    'X-INSEE-Api-Key-Integration': 'XXXXXX',
     'Accept': 'application/json',
 }
 
@@ -58,7 +41,7 @@ for num in range(0, len(data)):
     sirenFromSiret = convertSiretToSiren(str(data["SIRET_ACTEUR"][num]))
     increment = increment + 1
     if(sirenFromSiret != ""):
-        url = "https://api.insee.fr/entreprises/sirene/siren/"+sirenFromSiret # URL de l'API propre à chaque opérateur
+        url = "https://api.insee.fr/api-sirene/3.11/siren/"+sirenFromSiret # URL de l'API propre à chaque opérateur
         response = requests.get(url, params=params, headers=headers) # Requête pour récupérer de manière unitaire les éléments
         # On convertit la réponse obtenue au format json
         jsonResponse = response.json()

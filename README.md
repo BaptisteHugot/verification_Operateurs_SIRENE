@@ -5,7 +5,7 @@ Ce script vérifie si les opérateurs présents dans le [fichier de l'Arcep](htt
 * [Python](https://www.python.org/) - Le langage de programmation utilisé
 
 ## Prérequis
-Vous devez au préalable créer un compte sur le [site de l'INSEE](https://api.insee.fr/catalogue/site/pages/list-apis.jag) vous permettant d'utiliser les différentes API, en entrer par la suite dans le script Python vos identifiants adéquats, notamment le jeton d'accès.
+Vous devez au préalable créer un compte sur le [site de l'INSEE](https://api.insee.fr/catalogue/site/pages/list-apis.jag) vous permettant d'utiliser les différentes API, en entrer par la suite dans le script Python vos identifiants adéquats, notamment l'identifiant de l'application utilisée.
 
 ## Versions
 [SemVer](http://semver.org/) est utilisé pour la gestion des versions. Pour connaître les versions disponibles, veuillez vous référer aux [étiquettes de ce dépôt](https://github.com/BaptisteHugot/verification_Operateurs_SIRENE/releases/).
