@@ -1,11 +1,13 @@
-# verification_Operateurs_SIRENE
-Ce script vérifie si les opérateurs présents dans le [fichier de l'Arcep](https://www.data.gouv.fr/fr/datasets/identifiants-de-communications-electroniques/), librement téléchargeable, sont administrativement actifs ou cessés, en interrogeant la base SIRENE par l'[API de l'INSEE](https://api.insee.fr/catalogue/site/themes/wso2/subthemes/insee/pages/item-info.jag?name=Sirene&version=V3&provider=insee).
+# verification_Operateurs_SIRENE_RNE
+Ce script vérifie si les opérateurs présents dans le [fichier de l'Arcep](https://www.data.gouv.fr/fr/datasets/identifiants-de-communications-electroniques/), librement téléchargeable, sont administrativement actifs ou cessés, en interrogeant la base SIRENE par l'[API de l'INSEE](https://api.insee.fr/catalogue/site/themes/wso2/subthemes/insee/pages/item-info.jag?name=Sirene&version=V3&provider=insee) et le Registre National des Entreprises par l'[API de l'INPI](https://data.inpi.fr/content/editorial/Acces_API_Entreprises).
 
 ## Ecrit avec
 * [Python](https://www.python.org/) - Le langage de programmation utilisé
 
 ## Prérequis
-Vous devez au préalable créer un compte sur le [site de l'INSEE](https://api.insee.fr/catalogue/site/pages/list-apis.jag) vous permettant d'utiliser les différentes API, en entrer par la suite dans le script Python vos identifiants adéquats, notamment l'identifiant de l'application utilisée.
+Vous devez au préalable créer un compte sur le [site de l'INSEE](https://api.insee.fr/catalogue/site/pages/list-apis.jag) ainsi qu'un compte sur le [site de l'INPI](data.inpi.fr/) vous permettant d'utiliser les différentes API, en entrer par la suite dans le script Python vos identifiants adéquats :
+- l'identifiant de l'application utilisée pour accéder à l'API de l'INSEE ;
+- votre identifiant et votre mot de passe de connexion au site de l'INPI, pour générer un jeton d'accès à l'API.
 
 ## Versions
 [SemVer](http://semver.org/) est utilisé pour la gestion des versions. Pour connaître les versions disponibles, veuillez vous référer aux [étiquettes de ce dépôt](https://github.com/BaptisteHugot/verification_Operateurs_SIRENE/releases/).
